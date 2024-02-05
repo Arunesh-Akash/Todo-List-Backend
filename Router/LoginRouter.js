@@ -23,7 +23,7 @@ loginRouter.post("/", async (req, res) => {
       request.email = request.email.toLowerCase();
       let data = await User.findOne({ email: request.email });
       if (data) {
-        let passwordMatch = bcrypt.compare(request.password, data.password);
+        let passwordMatch = await bcrypt.compare(request.password, data.password);
         if (passwordMatch) {
           const successResponse = AppUtils.generateSuccess(
             "AUTHORISED",
@@ -32,20 +32,15 @@ loginRouter.post("/", async (req, res) => {
           successResponse.user = {
             email: data.email,
             name: data.name,
-            date_of_birth: data.date_of_birth,
-            friends: data.friends,
-            posts: data.posts,
-            comment: data.comment,
             createdAt: data.createdAt,
             updatedAt: data.updatedAt,
           };
-          successResponse.token = jwt.sign(
-            { email: data.email },
+          const token = jwt.sign(
+            { name:data.name,email: data.email },
             Constants.SECRET_KEY
           );
-          data.token = successResponse.token;
-          data.save();
-          res.json(successResponse);
+         
+          res.json({successResponse,token:token});
           return;
         } else {
           res
@@ -69,12 +64,6 @@ loginRouter.post("/", async (req, res) => {
       res.status(500).json(AppUtils.generateError(err.code, err.message));
     }
   });
-
-
-
-
-
-
 
 
 module.exports=loginRouter;

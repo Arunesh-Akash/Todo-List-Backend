@@ -19,13 +19,11 @@ signupRouter.post('/', async (req, res) => {
     try {
         user.password = await AppUtils.encryptPassword(user.password);
         user.email = user.email.toLowerCase();
-        user.token = jwt.sign({ email: user.email }, Constants.SECRET_KEY);
         const newUser = new User(user);
         await newUser.save();
         res.json({
             success: true,
-            message: "User created successfully",
-            token: user.token,
+            message: "User Created Successfully!"
         });
     } catch (err) {
         if (err.code == "11000")
@@ -37,11 +35,6 @@ signupRouter.post('/', async (req, res) => {
         else res.status(500).json(AppUtils.generateError(err.code, err.message));
     }
 });
-
-
-
-
-
 
 
 module.exports = signupRouter;

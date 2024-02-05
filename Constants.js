@@ -2,7 +2,6 @@ module.exports=class Constants{
     static USER={
         NAME:"name",
         EMAIL:"email",
-        DATE_OF_BIRTH:"date_of_birth",
         PASSWORD:"password"
     }
 

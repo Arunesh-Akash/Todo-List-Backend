@@ -8,7 +8,7 @@ const loginRouter=require("./Router/LoginRouter");
 const todoRouter=require("./Router/TodoRouter");
 const userRouter=require("./Router/UserRouter");
 
-mongoose.connect("mongodb://127.0.0.1/to-do_list");
+mongoose.connect("mongodb://localhost:27017/todo-DB");
 
 app.use(express.json());
 app.use(morgan("dev"));
