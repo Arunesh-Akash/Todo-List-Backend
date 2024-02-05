@@ -22,5 +22,8 @@ app.use("/user",userRouter);
 
 const APPLICATION_PORT=process.env.PORT;
 app.listen(APPLICATION_PORT,()=>{
-    console.log("Server is listening on port 4500");
+    console.log(`Server is listening on port ${APPLICATION_PORT}`);
+    app.get('/',(req,res)=>{
+        res.send('Server is live');
+    })
 });
