@@ -9,7 +9,7 @@ const todoRouter=require("./Router/TodoRouter");
 const userRouter=require("./Router/UserRouter");
 require('dotenv').config();
 
-mongoose.connect("mongodb://localhost:27017/todo-DB");
+mongoose.connect("mongodb+srv://akashkr099:3iFki1wXzXubJM6v@cluster0.5iqroxk.mongodb.net/?retryWrites=true&w=majority");
 
 app.use(express.json());
 app.use(morgan("dev"));
